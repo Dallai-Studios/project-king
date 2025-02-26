@@ -1,7 +1,10 @@
 #include "KPlayerCharacter.h"
 #include "PaperFlipbookComponent.h"
 #include "Camera/CameraComponent.h"
+#include "PaperZD/Public/PaperZDAnimationComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+
+
 
 // =================================================
 // Ciclo de Vida:
@@ -17,6 +20,8 @@ AKPlayerCharacter::AKPlayerCharacter() {
 
 	this->playerCamera = this->CreateDefaultSubobject<UCameraComponent>("Player Camera");
 	this->playerCamera->SetupAttachment(this->cameraSpringArm);
+
+	this->animationComponent = this->CreateDefaultSubobject<UPaperZDAnimationComponent>("Animation Component");
 }
 
 void AKPlayerCharacter::BeginPlay() {
@@ -33,7 +38,7 @@ void AKPlayerCharacter::Tick(float DeltaTime) {
 // Movimento do Player:
 // =================================================
 void AKPlayerCharacter::StartMoving() {
-	this->flipbookComponent->SetFlipbook(this->runFlipbook);
+	this->playerIsMoving = true;
 }
 
 void AKPlayerCharacter::MovePlayer(float axisValue) {
@@ -50,9 +55,18 @@ void AKPlayerCharacter::MovePlayer(float axisValue) {
 }
 
 void AKPlayerCharacter::StopMoving() {
-	this->flipbookComponent->SetFlipbook(this->idleFlipbook);
+	this->playerIsMoving = false;
 }
 
+bool AKPlayerCharacter::IsPlayerMoving() const {
+	return this->playerIsMoving;
+}
+
+
+
+// =================================================
+// Ataque do Player:
+// =================================================
 void AKPlayerCharacter::Attack(EKAttackDirection attackDirection) {
 	auto flipbookScale = this->flipbookComponent->GetRelativeScale3D();
 
@@ -72,13 +86,7 @@ void AKPlayerCharacter::Attack(EKAttackDirection attackDirection) {
 	}
 
 	this->flipbookComponent->SetRelativeScale3D(flipbookScale);
-
-	switch (this->currentAttack) {
-		case 1: this->flipbookComponent->SetFlipbook(this->attack1Flipbook); break;
-		case 2: this->flipbookComponent->SetFlipbook(this->attack2Flipbook); break;
-		case 3: this->flipbookComponent->SetFlipbook(this->attack3Flipbook); break;
-	}
-
+	
 	this->currentAttack++;
 	if (this->currentAttack > 3) this->currentAttack = 1;
 }

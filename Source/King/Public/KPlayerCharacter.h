@@ -23,6 +23,9 @@ public:
 	UPROPERTY(EditAnywhere, Category="Components")
 	class UCameraComponent* playerCamera;
 
+	UPROPERTY(EditAnywhere, Category="Components")
+	class UPaperZDAnimationComponent* animationComponent;
+
 
 	
 	// =================================================
@@ -34,33 +37,20 @@ public:
 	UPROPERTY(EditAnywhere, Category="Character Config")
 	float negativeMovementXScale;	
 
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	class UPaperFlipbook* idleFlipbook;
-
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	UPaperFlipbook* runFlipbook;
-
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	UPaperFlipbook* attack1Flipbook;
-
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	UPaperFlipbook* attack2Flipbook;
-
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	UPaperFlipbook* attack3Flipbook;
-
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	UPaperFlipbook* takeHitFlipbook;
-
-	UPROPERTY(EditAnywhere, Category="Character Config")
-	UPaperFlipbook* deathFlipbook;
-
 
 	
 	// =================================================
 	// Ataques do Player:
 	// =================================================
 	int currentAttack = 1;
+
+
+
+	// =================================================
+	// Movimento do Player:
+	// =================================================
+	bool playerIsMoving = false;
+
 	
 
 public:
@@ -84,6 +74,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Player Movement")
 	void StopMoving();
+
+	UFUNCTION(BlueprintPure, BlueprintCallable, Category="Player Movement")
+	bool IsPlayerMoving() const;
 
 
 
