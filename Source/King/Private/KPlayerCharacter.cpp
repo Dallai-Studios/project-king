@@ -7,7 +7,7 @@
 
 
 // =================================================
-// Ciclo de Vida:
+// Life Cycle:
 // =================================================
 AKPlayerCharacter::AKPlayerCharacter() {
 	PrimaryActorTick.bCanEverTick = true;
@@ -35,7 +35,7 @@ void AKPlayerCharacter::Tick(float DeltaTime) {
 
 
 // =================================================
-// Movimento do Player:
+// Player Movement:
 // =================================================
 void AKPlayerCharacter::StartMoving() {
 	this->playerIsMoving = true;
@@ -65,7 +65,7 @@ bool AKPlayerCharacter::IsPlayerMoving() const {
 
 
 // =================================================
-// Ataque do Player:
+// Player Attack:
 // =================================================
 void AKPlayerCharacter::Attack(EKAttackDirection attackDirection) {
 	auto flipbookScale = this->flipbookComponent->GetRelativeScale3D();

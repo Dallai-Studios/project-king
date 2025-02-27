@@ -29,7 +29,7 @@ public:
 
 	
 	// =================================================
-	// Configuração do Player:
+	// Player Config:
 	// =================================================
 	UPROPERTY(EditAnywhere, Category="Character Config")
 	float positiveMovementXScale;
@@ -40,14 +40,14 @@ public:
 
 	
 	// =================================================
-	// Ataques do Player:
+	// Player Attack:
 	// =================================================
 	int currentAttack = 1;
 
 
 
 	// =================================================
-	// Movimento do Player:
+	// Player Movement:
 	// =================================================
 	bool playerIsMoving = false;
 
@@ -55,7 +55,7 @@ public:
 
 public:
 	// =================================================
-	// Ciclo de Vida:
+	// Life Cycle:
 	// =================================================
 	AKPlayerCharacter();
 	virtual void BeginPlay() override;
@@ -64,7 +64,7 @@ public:
 
 	
 	// =================================================
-	// Movimento do Player:
+	// Player Movement:
 	// =================================================
 	UFUNCTION(BlueprintCallable, Category="Player Movement")
 	void StartMoving();
@@ -81,7 +81,7 @@ public:
 
 
 	// =================================================
-	// Ataques do Player:
+	// Player Attack:
 	// =================================================
 	UFUNCTION(BlueprintCallable, Category="Player Attack")
 	void Attack(EKAttackDirection attackDirection);
