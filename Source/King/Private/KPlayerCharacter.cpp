@@ -68,6 +68,8 @@ bool AKPlayerCharacter::IsPlayerMoving() const {
 // Player Attack:
 // =================================================
 void AKPlayerCharacter::Attack(EKAttackDirection attackDirection) {
+	if (!this->canAttack) return;
+	
 	auto flipbookScale = this->flipbookComponent->GetRelativeScale3D();
 
 	// I'm using this control variable just to make sure to propel the player to the right
@@ -84,9 +86,14 @@ void AKPlayerCharacter::Attack(EKAttackDirection attackDirection) {
 		flipbookScale.X = this->negativeMovementXScale;
 		directionMultiplayer = -1;
 	}
-
-	this->flipbookComponent->SetRelativeScale3D(flipbookScale);
 	
+	this->flipbookComponent->SetRelativeScale3D(flipbookScale);
+	this->LaunchCharacter(
+		this->GetActorForwardVector() * (this->attackLaunchSpeed * directionMultiplayer),
+		false,
+		false
+	);
+
 	this->currentAttack++;
 	if (this->currentAttack > 3) this->currentAttack = 1;
 }

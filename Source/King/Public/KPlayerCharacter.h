@@ -42,6 +42,12 @@ public:
 	// =================================================
 	// Player Attack:
 	// =================================================
+	UPROPERTY(BlueprintReadWrite, Category="Attack")
+	bool canAttack = true;
+
+	UPROPERTY(EditAnywhere, Category="Attack")
+	float attackLaunchSpeed = 100;
+	
 	int currentAttack = 1;
 
 
