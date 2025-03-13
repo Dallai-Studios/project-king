@@ -46,7 +46,7 @@ public:
 	bool canAttack = true;
 
 	UPROPERTY(EditAnywhere, Category="Attack")
-	float attackLaunchSpeed = 100;
+	float attackLaunchSpeed = 1000;
 	
 	int currentAttack = 1;
 
